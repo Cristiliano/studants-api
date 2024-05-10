@@ -7,5 +7,9 @@ namespace Student.Application.Interfaces
     {
         int Add(AlunoInputModel model);
         AlunoEntity? GetByNameCpf(string? name, string? cpf);
+        List<AlunoEntity?> GetAll();
+        AlunoEntity? GetById(int id);
+        AlunoEntity? Update(AlunoInputModel aluno, int id);
+        bool Delete(int id);
     }
 }

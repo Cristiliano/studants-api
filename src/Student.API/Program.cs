@@ -24,10 +24,12 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(s =>
 {
+    s.EnableAnnotations();
+
     s.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Documentacao",
-        Description = "teste",
+        Title = "Documentação API",
+        Description = "API de Teste da Dexian",
         Version = "1.0",
     });
 

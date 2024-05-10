@@ -7,11 +7,9 @@ namespace Student.Infraestructure.Repositories
 {
     public class AlunoRepository : IAlunoRepository
     {
-        private List<AlunoEntity> alunoEntities = new List<AlunoEntity>();
-
-        public AlunoRepository() 
+        private List<AlunoEntity> alunoEntities = new List<AlunoEntity>()
         {
-            alunoEntities.Add(new AlunoEntity()
+            new AlunoEntity()
             {
                 iCodAluno = 1,
                 dNascimento = DateTime.UtcNow,
@@ -19,8 +17,10 @@ namespace Student.Infraestructure.Repositories
                 sCPF = "1234",
                 sEndereco = "casa",
                 sNome = "juao"
-            });
-        }
+            }
+        };
+
+        public AlunoRepository() { }
 
         public int Add(AlunoInputModel model)
         {
@@ -47,6 +47,51 @@ namespace Student.Infraestructure.Repositories
                 return null;
             }
             return alunoEntities.Find(a => a.sNome == name && a.sCPF == cpf);
+        }
+        
+        public AlunoEntity? GetById(int id) 
+        {
+            return alunoEntities.Find(a => a.iCodAluno == id);
+        }
+        
+        public List<AlunoEntity?> GetAll() 
+        {
+            return alunoEntities;
+        }
+
+        public AlunoEntity? Update(AlunoInputModel aluno, int id)
+        {
+            var alunoFind = GetById(id);
+            
+            if (alunoFind is null)
+            {
+                return null;
+            } 
+
+            alunoFind = new AlunoEntity
+            {
+                sNome = aluno.sNome,
+                sCPF = aluno.sCPF,
+                dNascimento = aluno.dNascimento,
+                sCelular = aluno.sCelular,
+                sEndereco = aluno.sEndereco,
+            };
+
+            return alunoFind;
+        }
+
+        public bool Delete(int id)
+        {
+            var alunoFind = GetById(id);
+
+            if (alunoFind is null)
+            {
+                return false;
+            }
+
+            alunoEntities.Remove(alunoFind);
+
+            return true;
         }
     }
 }

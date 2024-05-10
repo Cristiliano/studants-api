@@ -7,5 +7,9 @@ namespace Student.Application.Services
     {
         int AddAluno(AlunoInputModel model);
         AlunoDTO? GetAlunoByNameCpf(AlunoInputModel model);
+        List<AlunoDTO?> GetAll();
+        AlunoDTO? GetById(int id);
+        AlunoDTO? Update(AlunoInputModel model, int id);
+        bool Delete(int id);
     }
 }
