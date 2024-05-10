@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Student.Application.Models.InputModels;
 using Student.Application.Services;
 using Student.Domain.DTOs;
@@ -16,15 +17,16 @@ namespace Student.API.Controllers
             _service = service;
         }
 
+        [Authorize]
         [HttpPost("create")]
-        public IActionResult Create([FromBody] AlunoDTO aluno)
+        public IActionResult Create([FromBody] AlunoInputModel aluno)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = _service.AddAluno(new AlunoInputModel(aluno.sNome, aluno.dNascimento, aluno.sCPF, aluno.sEndereco, aluno.sCelular));
+            var result = _service.AddAluno(aluno);
 
             return Ok(result);
         }
