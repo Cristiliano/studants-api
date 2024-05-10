@@ -2,19 +2,27 @@
 {
     public class AlunoInputModel
     {
-        public AlunoInputModel(string _sNome, DateTime _dNascimento, string _sCPF, string _sEndereco, string _sCelular)
+        public AlunoInputModel(string? sNome, DateTime? dNascimento, string? sCPF, string? sEndereco, string? sCelular)
         {
-            _sNome = sNome;
-            _dNascimento = dNascimento;
-            _sCPF = sCPF;
-            _sEndereco = sEndereco;
-            _sCelular = sCelular;
+            this.sNome = sNome;
+            this.dNascimento = dNascimento;
+            this.sCPF = sCPF;
+            this.sEndereco = sEndereco;
+            this.sCelular = sCelular;
         }
 
-        public string sNome { get; set; }
-        public DateTime dNascimento { get; set; }
-        public string sCPF { get; set; }
-        public string sEndereco { get; set; }
-        public string sCelular { get; set; }
+        public AlunoInputModel(string? sNome, string? sCPF) 
+        {
+            this.sNome = sNome; 
+            this.sCPF = sCPF;
+        }
+
+        public AlunoInputModel() { }
+
+        public string? sNome { get; set; }
+        public DateTime? dNascimento { get; set; }
+        public string? sCPF { get; set; }
+        public string? sEndereco { get; set; }
+        public string? sCelular { get; set; }
     }
 }
