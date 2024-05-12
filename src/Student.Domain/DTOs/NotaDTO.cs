@@ -4,6 +4,8 @@ namespace Student.Domain.DTOs
 {
     public class NotaDTO : NotaEntity
     {
+        public NotaDTO() { }
+
         public NotaDTO(NotaEntity nota) 
         {
             iCodNota = nota.iCodNota;

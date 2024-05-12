@@ -9,9 +9,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
+builder.Services.AddSingleton<IAlunoRepository, AlunoRepository>();
+builder.Services.AddSingleton<IMateriaRepository, MateriaRepository>();
+builder.Services.AddSingleton<INotaRepository, NotaRepository>();
+
 builder.Services.AddScoped<IAlunoService, AlunoService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IMateriaService, MateriaService>();
+builder.Services.AddScoped<INotaService, NotaService>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(opt =>
 {
@@ -19,6 +24,8 @@ builder.Services.AddControllers().AddNewtonsoftJson(opt =>
 });
 
 builder.Services.AddControllers();
+
+builder.Services.AddRouting(opt => opt.LowercaseUrls = true);
 
 builder.Services.AddEndpointsApiExplorer();
 

@@ -25,7 +25,7 @@ namespace Student.Infraestructure.Repositories
         public int Add(AlunoInputModel model)
         {
             var rand = new Random();
-            int ID = rand.Next(1, 1000);
+            int ID = rand.Next(2, 1000);
             var entity = new AlunoEntity
             {
                 iCodAluno = ID,
@@ -66,18 +66,19 @@ namespace Student.Infraestructure.Repositories
             if (alunoFind is null)
             {
                 return null;
-            } 
+            }
 
-            alunoFind = new AlunoEntity
+            foreach (var a in alunoEntities.Where(a => a.iCodAluno == id))
             {
-                sNome = aluno.sNome,
-                sCPF = aluno.sCPF,
-                dNascimento = aluno.dNascimento,
-                sCelular = aluno.sCelular,
-                sEndereco = aluno.sEndereco,
-            };
+                a.iCodAluno = id;
+                a.sNome = aluno.sNome;
+                a.sCelular = aluno.sCelular;
+                a.dNascimento = aluno.dNascimento;
+                a.sCPF = aluno.sCPF;
+                a.sEndereco = aluno.sEndereco;
+            }
 
-            return alunoFind;
+            return alunoEntities.Where(a => a.iCodAluno == id).FirstOrDefault();
         }
 
         public bool Delete(int id)

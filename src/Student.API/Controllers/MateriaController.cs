@@ -13,28 +13,28 @@ namespace Student.API.Controllers
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
     [SwaggerResponse(StatusCodes.Status404NotFound)]
     [SwaggerResponse(StatusCodes.Status500InternalServerError)]
-    public class AlunoController(IAlunoService service) : ControllerBase
+    public class MateriaController(IMateriaService service) : ControllerBase
     {
-        private readonly IAlunoService _service = service;
+        private readonly IMateriaService _service = service;
 
         [HttpPost("create")]
-        [SwaggerOperation("cria um objeto aluno")]
+        [SwaggerOperation("cria um objeto materia")]
         [ProducesResponseType(typeof(IEnumerable<int>), StatusCodes.Status200OK)]
-        public IActionResult Create([FromBody] AlunoInputModel aluno)
+        public IActionResult Create([FromBody] MateriaInputModel materia)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = _service.AddAluno(aluno);
+            var result = _service.AddMateria(materia);
 
             return Ok(result);
         }
 
         [HttpGet("get_all")]
-        [SwaggerOperation("recupera a lista de objetos aluno")]
-        [ProducesResponseType(typeof(IEnumerable<List<AlunoDTO?>>), StatusCodes.Status200OK)]
+        [SwaggerOperation("recupera a lista de objetos materia")]
+        [ProducesResponseType(typeof(IEnumerable<List<MateriaDTO?>>), StatusCodes.Status200OK)]
         public IActionResult GetAll()
         {
             if (!ModelState.IsValid)
@@ -48,9 +48,9 @@ namespace Student.API.Controllers
         }
 
         [HttpGet("get_by_id/{id}")]
-        [SwaggerOperation("recupera o objeto aluno com base no iCodAluno")]
-        [ProducesResponseType(typeof(IEnumerable<AlunoDTO?>), StatusCodes.Status200OK)]
-        public IActionResult GetById([FromRoute]int id)
+        [SwaggerOperation("recupera o objeto aluno com base no iCodMateria")]
+        [ProducesResponseType(typeof(IEnumerable<MateriaDTO?>), StatusCodes.Status200OK)]
+        public IActionResult GetById([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -63,24 +63,24 @@ namespace Student.API.Controllers
         }
 
         [HttpPatch("update/{id}")]
-        [SwaggerOperation("atualiza os dados do aluno passado, com base no iCodAluno")]
-        [ProducesResponseType(typeof(IEnumerable<AlunoDTO?>), StatusCodes.Status200OK)]
-        public IActionResult Update([FromBody] AlunoInputModel aluno, [FromRoute] int id)
+        [SwaggerOperation("atualiza os dados da materia passada, com base no iCodMateria")]
+        [ProducesResponseType(typeof(IEnumerable<MateriaDTO?>), StatusCodes.Status200OK)]
+        public IActionResult Update([FromBody] MateriaInputModel materia, [FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = _service.Update(aluno, id);
+            var result = _service.Update(materia, id);
 
             return Ok(result);
         }
 
         [HttpDelete("delete/{id}")]
-        [SwaggerOperation("remove o aluno correspondente ao iCodAluno passado")]
+        [SwaggerOperation("remove a materia correspondente ao iCodMateria passado")]
         [ProducesResponseType(typeof(IEnumerable<bool>), StatusCodes.Status200OK)]
-        public IActionResult Delete([FromRoute]int id)
+        public IActionResult Delete([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {

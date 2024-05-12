@@ -1,11 +1,17 @@
 ﻿using Swashbuckle.AspNetCore.Annotations;
 
-namespace Student.Domain.Entities
+namespace Student.Application.Models.InputModels
 {
-    public class NotaEntity
+    public class NotaInputModel
     {
-        [SwaggerSchema(Description = "Código de idendificação da Nota")]
-        public int iCodNota { get; set; }
+        public NotaInputModel() {}
+
+        public NotaInputModel(int iCodAluno, int iCodMateria, decimal nNota)
+        {
+            this.iCodAluno = iCodAluno;
+            this.iCodMateria = iCodMateria;
+            this.nNota = nNota;
+        }
 
         [SwaggerSchema(Description = "Código de idendificação do aluno")]
         public int iCodAluno { get; set; }

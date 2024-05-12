@@ -1,24 +1,23 @@
 ﻿using Student.Application.Interfaces;
 using Student.Application.Models.InputModels;
 using Student.Domain.DTOs;
-using System.Reflection;
 
 namespace Student.Application.Services
 {
     public class AlunoService : IAlunoService
     {
-        private readonly IAlunoRepository _alunoRepository;
+        private readonly IAlunoRepository _repository;
 
         public AlunoService(IAlunoRepository alunoRepository)
         {
-            _alunoRepository = alunoRepository;
+            _repository = alunoRepository;
         }
 
         public int AddAluno(AlunoInputModel model)
         {
             try
             {
-                var alunoId = _alunoRepository.Add(model);
+                var alunoId = _repository.Add(model);
 
                 return alunoId;
             }
@@ -33,7 +32,7 @@ namespace Student.Application.Services
         {
             try
             {
-                var aluno = _alunoRepository.GetByNameCpf(model.sNome, model.sCPF);
+                var aluno = _repository.GetByNameCpf(model.sNome, model.sCPF);
 
                 if (aluno is null)
                 {
@@ -53,7 +52,7 @@ namespace Student.Application.Services
         {
             try
             {
-                var aluno = _alunoRepository.GetById(id);
+                var aluno = _repository.GetById(id);
 
                 if (aluno is null)
                 {
@@ -73,7 +72,7 @@ namespace Student.Application.Services
         {
             try
             {
-                var alunos = _alunoRepository.GetAll();
+                var alunos = _repository.GetAll();
 
                 if (alunos.Count == 0)
                 {
@@ -93,7 +92,7 @@ namespace Student.Application.Services
         {
             try
             {
-                var aluno = _alunoRepository.Update(model, id);
+                var aluno = _repository.Update(model, id);
 
                 if (aluno is null)
                 {
@@ -113,7 +112,7 @@ namespace Student.Application.Services
         {
             try
             {
-                return _alunoRepository.Delete(id);
+                return _repository.Delete(id);
             }
             catch (Exception ex)
             {
