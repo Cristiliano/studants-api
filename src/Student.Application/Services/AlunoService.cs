@@ -7,10 +7,12 @@ namespace Student.Application.Services
     public class AlunoService : IAlunoService
     {
         private readonly IAlunoRepository _repository;
+        private readonly INotaRepository _notaRepository;
 
-        public AlunoService(IAlunoRepository alunoRepository)
+        public AlunoService(IAlunoRepository alunoRepository, INotaRepository notaRepository)
         {
             _repository = alunoRepository;
+            _notaRepository = notaRepository;
         }
 
         public int AddAluno(AlunoInputModel model)
@@ -118,6 +120,26 @@ namespace Student.Application.Services
             {
                 Console.WriteLine(ex.Message);
                 return false;
+            }
+        }
+
+        public decimal GetNotaAluno(int id)
+        {
+            try
+            {
+                var aluno = GetById(id);
+
+                if(aluno is null)
+                {
+                    return 0;
+                }
+
+                return _notaRepository.GetNotaAluno(id);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
             }
         }
     }

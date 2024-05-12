@@ -4,6 +4,7 @@ using Student.Application.Models.InputModels;
 using Student.Application.Services;
 using Student.Domain.DTOs;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Security.Claims;
 
 namespace Student.API.Controllers
 {
@@ -88,6 +89,31 @@ namespace Student.API.Controllers
             }
 
             var result = _service.Delete(id);
+
+            return Ok(result);
+        }
+
+        [HttpGet("consulta_nota/{id}")]
+        [SwaggerOperation("retorna a nota do aluno com base no iCodAluno")]
+        [ProducesResponseType(typeof(IEnumerable<decimal>), StatusCodes.Status200OK)]
+        public IActionResult GetNotaAluno([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!int.TryParse(User.FindFirstValue("iCodAluno"), out int iCodAlunoToken))
+            {
+                return Unauthorized();
+            }
+
+            if (iCodAlunoToken != id)
+            {
+                return Unauthorized();
+            }
+
+            var result = _service.GetNotaAluno(id);
 
             return Ok(result);
         }

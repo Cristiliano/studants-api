@@ -20,7 +20,7 @@ namespace Student.Infraestructure.Repositories
             }
         };
 
-        public AlunoRepository() { }
+        public AlunoRepository(INotaRepository notaRepository) { }
 
         public int Add(AlunoInputModel model)
         {

@@ -77,5 +77,17 @@ namespace Student.Infraestructure.Repositories
 
             return true;
         }
+
+        public decimal GetNotaAluno(int iCodAluno)
+        {
+            var notaFind = notaEntities.Find(n => n.iCodAluno == iCodAluno);
+
+            if(notaFind is null)
+            {
+                return 0;
+            }
+
+            return notaFind.nNota;
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace Student.Application.Services
         AlunoDTO? GetById(int id);
         AlunoDTO? Update(AlunoInputModel model, int id);
         bool Delete(int id);
+        decimal GetNotaAluno(int id);
     }
 }

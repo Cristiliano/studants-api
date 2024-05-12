@@ -10,5 +10,6 @@ namespace Student.Application.Interfaces
         NotaEntity? GetById(int id);
         NotaEntity? Update(NotaInputModel aluno, int id);
         bool Delete(int id);
+        decimal GetNotaAluno(int iCodAluno);
     }
 }
