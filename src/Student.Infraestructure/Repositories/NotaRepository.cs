@@ -37,7 +37,7 @@ namespace Student.Infraestructure.Repositories
 
         public NotaEntity? GetById(int id)
         {
-            return notaEntities.Find(m => m.iCodMateria == id);
+            return notaEntities.Find(m => m.iCodNota == id);
         }
 
         public List<NotaEntity?> GetAll()

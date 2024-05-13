@@ -2,7 +2,6 @@
 using Microsoft.IdentityModel.Tokens;
 using Student.Application.Models.InputModels;
 using Student.Application.Services;
-using Student.Domain.DTOs;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Student.API.Controllers
@@ -25,11 +24,11 @@ namespace Student.API.Controllers
         [HttpPost]
         [SwaggerOperation("gera um token tomando por parametro o iCodAluno correspondente a chave (nome, cpf)")]
         [ProducesResponseType(typeof(IEnumerable<object>), StatusCodes.Status200OK)]
-        public IActionResult Auth(string? name, string? cpf)
+        public IActionResult Auth([FromBody] AuthInputModel model)
         {
-            if(!name.IsNullOrEmpty() && !cpf.IsNullOrEmpty())
+            if(!model.Nome.IsNullOrEmpty() && !model.Cpf.IsNullOrEmpty())
             {
-                var aluno = _alunoService.GetAlunoByNameCpf(new AlunoInputModel(name, cpf));
+                var aluno = _alunoService.GetAlunoByNameCpf(new AlunoInputModel(model.Nome, model.Cpf));
 
                 var token = _tokenService.GenerateTokenUser(aluno.iCodAluno);
 

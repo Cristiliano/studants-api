@@ -4,16 +4,10 @@ using Student.Domain.DTOs;
 
 namespace Student.Application.Services
 {
-    public class AlunoService : IAlunoService
+    public class AlunoService(IAlunoRepository alunoRepository, INotaRepository notaRepository) : IAlunoService
     {
-        private readonly IAlunoRepository _repository;
-        private readonly INotaRepository _notaRepository;
-
-        public AlunoService(IAlunoRepository alunoRepository, INotaRepository notaRepository)
-        {
-            _repository = alunoRepository;
-            _notaRepository = notaRepository;
-        }
+        private readonly IAlunoRepository _repository = alunoRepository;
+        private readonly INotaRepository _notaRepository = notaRepository;
 
         public int AddAluno(AlunoInputModel model)
         {
@@ -26,7 +20,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return -1;
+                throw;
             }
         }
 
@@ -46,7 +40,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -66,7 +60,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -86,7 +80,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -98,7 +92,7 @@ namespace Student.Application.Services
 
                 if (aluno is null)
                 {
-                    return null;
+                    return new AlunoDTO();
                 }
 
                 return new AlunoDTO(aluno);
@@ -106,7 +100,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -119,7 +113,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                throw;
             }
         }
 
@@ -139,7 +133,7 @@ namespace Student.Application.Services
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return 0;
+                throw;
             }
         }
     }

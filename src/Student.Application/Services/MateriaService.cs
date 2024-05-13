@@ -4,14 +4,9 @@ using Student.Domain.DTOs;
 
 namespace Student.Application.Services
 {
-    public class MateriaService : IMateriaService
+    public class MateriaService(IMateriaRepository repository) : IMateriaService
     {
-        private readonly IMateriaRepository _repository;
-
-        public MateriaService(IMateriaRepository repository)
-        {
-            _repository = repository;
-        }
+        private readonly IMateriaRepository _repository = repository;
 
         public int AddMateria(MateriaInputModel model)
         {
@@ -24,7 +19,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return -1;
+                throw;
             }
         }
 
@@ -44,7 +39,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -64,7 +59,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -84,7 +79,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -97,7 +92,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                throw;
             }
         }
     }

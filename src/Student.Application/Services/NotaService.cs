@@ -4,14 +4,9 @@ using Student.Domain.DTOs;
 
 namespace Student.Application.Services
 {
-    public class NotaService : INotaService
+    public class NotaService(INotaRepository repository) : INotaService
     {
-        public readonly INotaRepository _repository;
-
-        public NotaService(INotaRepository repository)
-        {
-            _repository = repository;
-        }
+        public readonly INotaRepository _repository = repository;
 
         public int AddNota(NotaInputModel model)
         {
@@ -24,7 +19,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return -1;
+                throw;
             }
         }
 
@@ -44,7 +39,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -64,7 +59,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -84,7 +79,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                throw;
             }
         }
 
@@ -97,7 +92,7 @@ namespace Student.Application.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                throw;
             }
         }
     }
